@@ -193,7 +193,7 @@ Tags should not be prefixed to Function or Sub names, but **should** be appended
 
 _**Correct approach for internal function:**_
 ```
-Private Function TotalUp(ByVal **sng**SubTotal As Single) As Integer
+Private Function TotalUp(ByVal sngSubTotal As Single) As Integer
 ```
 
 ## Function return values
