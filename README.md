@@ -10,7 +10,7 @@ Avoid confusion over ByVal and ByRef. Be aware of the default for parameters bei
  
 Example:
 ```
-    Public Sub Load(ByVal strName As String, ByVal strPhone As String)
+Public Sub Load(ByVal strName As String, ByVal strPhone As String)
 ```
 
 ## General errors
@@ -109,7 +109,7 @@ Object qualifiers may follow a name and further clarify names that are similar. 
 Array names must be prefixed with "a". The upper and lower bounds of the array must be declared explicitly (unless they’re not known at design-time).
 Example:
 ```
-    Dim astrMonths(1 To 12) as String
+Dim astrMonths(1 To 12) as String
 ```
 
 ## Constants
@@ -118,8 +118,8 @@ Each word must be capitalised and the words separated with an underscore.  The b
 
 Example:
 ```
-    User defined constant: g_intERR_INVALID_NAME
-    Visual Basic: vbArrowHourglass
+User defined constant: g_intERR_INVALID_NAME
+Visual Basic: vbArrowHourglass
 ```
 
 # API  Declaration
@@ -128,19 +128,19 @@ Example:
 
 API declarations must be laid out so that they are easily readable on the screen.
 ```
-    Public Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" _
-        (ByVal lpApplicationName As String, _
-        ByVal lpKeyName As Any, _
-        ByVal lpString As Any, _
-        ByVal lpFileName As String) As Long
+Public Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" _
+	(ByVal lpApplicationName As String, _
+	ByVal lpKeyName As Any, _
+	ByVal lpString As Any, _
+	ByVal lpFileName As String) As Long
 ```
 
 ## Use unique alias names
 
 In VB you can call external procedures in DLLs when you know the entry point (the name of the function in the DLL). However, the caveat is that you can only declare the external procedure once. If you load a library that calls the same Windows API that your module calls, you will get the infamous error, “Tried to load module with duplicate procedure definition.”
 ```
-    Declare smg_GetActiveWindow Lib "Kernel" Alias _
-        "GetActiveWindo" () As Integer
+Declare smg_GetActiveWindow Lib "Kernel" Alias _
+	"GetActiveWindo" () As Integer
 ```
 
 # Form, Class & Module Naming
@@ -193,7 +193,7 @@ Tags should not be prefixed to Function or Sub names, but **should** be appended
 
 _**Correct approach for internal function:**_
 ```
-    Private Function TotalUp(ByVal **sng**SubTotal As Single) As Integer
+Private Function TotalUp(ByVal **sng**SubTotal As Single) As Integer
 ```
 
 ## Function return values
@@ -201,17 +201,17 @@ _**Correct approach for internal function:**_
 Function return values should usually be held in a temporary variable and then assigned to the function variable at the end of the routine. This has two benefits. The code is not specific to the name of the function so portability is aided when cutting and pasting part of the function code elsewhere; also the value of the function variable may be used in calculations, otherwise a recursive call would be generated.
 Example:
 ```
-    Private Function Example(ByVal argintA as Integer) as Single
-        Dim sngRetVal as Single
-    
-	       ' Set default value
-	       sngRetVal = 0
-    
-	       <code block>
-    
-	       ' Set the Function value
-	       Example = sngRetVal
-    End Function
+Private Function Example(ByVal argintA as Integer) as Single
+	Dim sngRetVal as Single
+
+	' Set default value
+	sngRetVal = 0
+
+	<code block>
+
+	' Set the Function value
+	Example = sngRetVal
+End Function
 ```
 
 ## Parameters
@@ -219,7 +219,7 @@ Example:
 Should you find it useful, you may also prefix parameter names with arg to avoid confusion between variables passed as parameters and those local to the subroutine .
 Example:
 ```
-    Private Function DoSomething(ByVal argstrMessage as String) as String
+Private Function DoSomething(ByVal argstrMessage as String) as String
 ```
 However, should you choose to adopt this standard it must be applied consistently across the entire project
 
@@ -264,19 +264,19 @@ The number of menu options can be great, so it is recommended that there be a st
 
 Example:
 ```
-    Top level menu item – mnuFile
-    Menu sub item – mnuFileSave
+Top level menu item – mnuFile
+Menu sub item – mnuFileSave
 ```
 
-# Naming Data Access Objects
+# **Naming Data Access Objects**
 
 ## ADO
 
 If you include references to both ADO and DAO in the same project you must explicitly specify which object model you wish to use when declaring variables.
 Example:
 ```
-    Dim cnnStore As ADODB.Connection
-    Dim cnnOther As DAO.Connection
+Dim cnnStore As ADODB.Connection
+Dim cnnOther As DAO.Connection
 ```
 
 ## ADO objects
@@ -330,30 +330,31 @@ Code must be indented consistently adhering to the following rules:
 - Code within error trap must be indented by to one tab stop.
 Example
 ```
-    Dim strTest as String
-    Dim wrk as Workspace
-    On Error Goto ErrHandler
-        If strTest = "" Then
-            strTest = "Nothing"
-        Else
-            strTest = ""
-        EndIf
+Dim strTest as String
+Dim wrk as Workspace
+On Error Goto ErrHandler
+	If strTest = "" Then
+    	strTest = "Nothing"
+	Else
+    	strTest = ""
+	EndIf
 
-        Do While Not rst.EOF
-            rst.Add
-            rst(0) = strTest
-            rst.Update
-        Loop
-        Select Case strTest
-        Case ""
-            <code block>
+    Do While Not rst.EOF
+		rst.Add
+        rst(0) = strTest
+        rst.Update
+	Loop
+
+	Select Case strTest
+    	Case ""
+        	<code block>
         Case Else
             <code block>
         End Select
-    ExitHere:
+ExitHere:
     Exit Sub
-    ErrHandler:
-        Resume ExitHere
+ErrHandler:
+	Resume ExitHere
 ```
 
 # Commenting Code
@@ -367,17 +368,17 @@ Remember the following points:
 
 Example:
 ```
-    Dim strLookUp as String 'Accepts value from user to search for
+Dim strLookUp as String 'Accepts value from user to search for
 ```
 - Comments for individual lines appear above, or of the code to which they refer.
 - The functional overview comment of a procedure may be indented one space to aid readability. 
 
 Example:
 ```
-    Public Sub DeleteCustomer(ByVal argintID As Long)
-        'Removes customer from Database
-        cnVideo.Execute "DELETE FROM Customer WHERE CustomerID=" & argintID
-    End Sub
+Public Sub DeleteCustomer(ByVal argintID As Long)
+	'Removes customer from Database
+	cnVideo.Execute "DELETE FROM Customer WHERE CustomerID=" & argintID
+End Sub
 ```
 
 ## Commenting code when doing maintenance work
@@ -396,12 +397,12 @@ When you include one or more routines written by other developers in your projec
 These are treated as a code IF statement would be.  All code relating to the condition must be indented as if it was a normal IF block.  These can be useful for including/excluding debug code etc.  For example:
 
 ```
-    #Const DebugMode = True
-    #IF  DebugMode THEN
-        <code block>
-    #ELSE
-        <code block>
-    #ENDIF
+#Const DebugMode = True
+#IF  DebugMode THEN
+	<code block>
+#ELSE
+	<code block>
+#ENDIF
 ```
 
 # Error Handling
@@ -433,4 +434,4 @@ End Sub
 
 ## Error handling labels
 
-The labels **ErrHandler** and **ExitHere** are used both for consistency across routines, and to facilitate easier copying and pasting of error handlers between routines. 
+The labels **ErrHandler** and **ExitHere** are used both for consistency across routines, and to facilitate easier copying and pasting of error handlers between routines.
