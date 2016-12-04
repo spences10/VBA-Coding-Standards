@@ -1,10 +1,53 @@
 # VBA Code Guidelines
 
-## General Advice
+<!-- TOC depthFrom:2 -->
+
+- [General Advice](#general-advice)
+- [Parameters](#parameters)
+- [General errors](#general-errors)
+- [Variables](#variables)
+	- [General](#general)
+	- [Declaring](#declaring)
+	- [Comments](#comments)
+	- [Variants](#variants)
+	- [Dates](#dates)
+- [General Naming Conventions](#general-naming-conventions)
+	- [General](#general)
+	- [Prefix](#prefix)
+	- [Tag](#tag)
+	- [Base Name](#base-name)
+	- [Qualifiers](#qualifiers)
+	- [Arrays](#arrays)
+	- [Constants](#constants)
+- [API Declaration](#api-declaration)
+	- [Use unique alias names](#use-unique-alias-names)
+- [Form, Class & Module Naming](#form-class-and-module-naming)
+	- [Internal Naming]()
+	- [File naming]()
+	- [Object instance naming]()
+	- [Notes]()
+- [Naming Procedures/Functions/Parameters]()
+	- [Function Names]()
+	- [Function return values]()
+	- [Parameters]()
+- [Naming Controls]()
+	- [Introduction]()
+	- [Control tags]()
+	- [Naming menu items]()
+- [Naming Data Access Objects]()
+	- [ADO]()
+	- [ADO objects]()
+	- [MS Access objects]()
+- [Layout]()
+	- [Indentation – tab width]()
+
+<!-- /TOC -->
+
+## General Advice <a name="general-advice"></a>
 
 Always use Option Explicit as the first line in every code module. To switch this on automatically check Require Variable Declaration in Tools>Options>Editor.
 
-## Parameters
+## Parameters <a name="parameters"></a>
 
 Avoid confusion over ByVal and ByRef. Be aware of the default for parameters being ByRef. Be explicit when passing parameters.
  
@@ -143,7 +186,7 @@ Declare smg_GetActiveWindow Lib "Kernel" Alias _
 	"GetActiveWindo" () As Integer
 ```
 
-# Form, Class & Module Naming
+# Form, Class & Module Naming <a name="form-class-and-module-naming"></a>
 
 ## Internal Naming
 
