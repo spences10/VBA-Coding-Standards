@@ -3,7 +3,7 @@
 <!-- TOC depthFrom:2 -->
 
 - [General Advice](#general-advice)
-- [Parameters](#parameters)
+- [Parameters](#parameters-by-val)
 - [General errors](#general-errors)
 - [Variables](#variables)
 	- [General](#general)
@@ -12,7 +12,7 @@
 	- [Variants](#variants)
 	- [Dates](#dates)
 - [General Naming Conventions](#general-naming-conventions)
-	- [General](#general)
+	- [General](#general-naming)
 	- [Prefix](#prefix)
 	- [Tag](#tag)
 	- [Base Name](#base-name)
@@ -22,24 +22,33 @@
 - [API Declaration](#api-declaration)
 	- [Use unique alias names](#use-unique-alias-names)
 - [Form, Class & Module Naming](#form-class-and-module-naming)
-	- [Internal Naming]()
-	- [File naming]()
-	- [Object instance naming]()
-	- [Notes]()
-- [Naming Procedures/Functions/Parameters]()
-	- [Function Names]()
-	- [Function return values]()
-	- [Parameters]()
-- [Naming Controls]()
-	- [Introduction]()
-	- [Control tags]()
-	- [Naming menu items]()
-- [Naming Data Access Objects]()
-	- [ADO]()
-	- [ADO objects]()
-	- [MS Access objects]()
-- [Layout]()
-	- [Indentation – tab width]()
+	- [Internal Naming](#internal-naming)
+	- [File naming](#file-naming)
+	- [Object instance naming](#object-instance-naming)
+	- [Notes](#notes)
+- [Naming Procedures/Functions/Parameters](#naming-procedures-functions-parameters)
+	- [Function Names](#function-names)
+	- [Function return values](#function-return-values)
+	- [Parameters](#Parameters)
+- [Naming Controls](#naming-controls)
+	- [Introduction](#introduction)
+	- [Control tags](#control-tags)
+	- [Naming menu items](#naming-menu-items)
+- [Naming Data Access Objects](#naming-data-access-objects)
+	- [ADO](#ado)
+	- [ADO objects](#ado-objects)
+	- [MS Access objects](#ms-access-objects)
+- [Layout](#layout)
+	- [Indentation – tab width](#indentation-tab-width)
+	- [Indentation - general](#indentation-general)
+- [Commenting Code](#commenting-code)
+	- [Comments](#comments)
+	- [Commenting code when doing maintenance work](#commenting-code-when-doing-maintenance-work)
+	- [Etiquette when commenting code](#etiquette-when-commenting-code)
+	- [Pre-compilation commands](#pre-compilation-commands)
+- [Error Handling](#error-handling)
+	- [Generic error handler](#generic-error-handler)
+	- [Error handling labels](#error-handling-labels)
 
 <!-- /TOC -->
 
@@ -47,7 +56,7 @@
 
 Always use Option Explicit as the first line in every code module. To switch this on automatically check Require Variable Declaration in Tools>Options>Editor.
 
-## Parameters <a name="parameters"></a>
+## Parameters <a name="parameters-by-val"></a>
 
 Avoid confusion over ByVal and ByRef. Be aware of the default for parameters being ByRef. Be explicit when passing parameters.
  
@@ -56,38 +65,38 @@ Example:
 Public Sub Load(ByVal strName As String, ByVal strPhone As String)
 ```
 
-## General errors
+## General errors <a name="parameters"></a>
 
 Error handling must be used wherever practicable i.e. within each procedure.
 Use On Error Goto ErrHandler
 Handle errors where they occur. This may involve handling the error and raising it to the client code.
 
-# Variables
+# Variables <a name="variables"></a>
 
-## General
+## General <a name="general-errors"></a>
 Where global variables are used, they must all be defined in one module.
 
-## Declaring
+## Declaring <a name="declaring"></a>
 
 Variables must be dimensioned on separate lines, and should specify a datatype (except where this is not possible – as when using certain scripting languages).
 
-## Comments
+## Comments <a name="comments"></a>
 
 All variables must be declared at the top of each procedure or module and must ideally be grouped so that all variable types are placed together.
 
-## Variants
+## Variants <a name="variants"></a>
 
 Variants may be used where appropriate (e.g. to hold arrays returned by a function, or where Nulls may be encountered), but alternative data types should be used where possible.
 
-## Dates
+## Dates <a name="dates"></a>
 
 Where dates are displayed to users you should avoid ambiguous formats where either years or days vs. months might be confused (such as DD/MM/YY), however the ultimate decision maker on this issue is the customer.
 
 Where dates are being handled “behind the scenes” care should be taken to avoid UK/US format confusion.  Particular care should be taken when including UK-format dates in literal SQL strings (where the target Microsoft application may expect dates to be in US format).  Where there is the slightest possibility of doubt pass the year, month and day parts separately into DateSerial, of format them in the universally acceptable ISO format YYYY-MM-DD. 
 
-# General Naming Conventions
+# General Naming Conventions <a name="general-naming-conventions"></a>
 
-## General
+## General <a name="general-naming"></a>
 
 Object names are made up of four parts: 
 prefix
@@ -98,7 +107,7 @@ The four parts are assembled as follows:
 [prefixes]tag[BaseName][Qualifier]
 Note: The brackets denote that these components are optional and are not part of the name.
 
-## Prefix
+## Prefix <a name="prefix"></a>
 
 Prefixes and tags are always lowercase so your eye goes past them to the first uppercase letter where the base name begins.  This makes the names more readable.  The base and qualifier components begin with an uppercase letter.
 
@@ -108,7 +117,7 @@ Prefixes and tags are always lowercase so your eye goes past them to the first u
 | m_ | Module level scope | m_strPolicyHolder |
 | g_ | Global scope | g_intCarsLast |
 
-## Tag
+## Tag <a name="tag"></a>
 
 The tag is the only required component, but in almost all cases the name will have the base name component since you need to be able to distinguish two objects of the same type.
 
@@ -127,11 +136,11 @@ The tag is the only required component, but in almost all cases the name will ha
 | User-defined type | udt | udtEmployee |
 | Variant | var | varCheckSum |
 
-## Base name
+## Base name <a name="base-name"></a>
 
 The base name succinctly describes the object, not its class. That is, a base name for a variable for an invoice form must be InvoiceEntry not InvoiceForm as the tag will describe the object. The base name is composed in the form Noun[Verb]. For example, in the variable name blnColourMatch "ColourMatch" is the base name. Naming variables in this way helps to keep them grouped together in documentation and cross-referencing because they will be sorted together alphabetically.
 
-## Qualifiers
+## Qualifiers <a name="qualifiers"></a>
 
 Object qualifiers may follow a name and further clarify names that are similar.  Continuing with our previous example, if you kept two indexes to an array, one for the first item and one for the last this entails two qualified variables such as intColourMatchFirst and intColourMatchLast. Other examples of qualifiers:
 
@@ -147,7 +156,7 @@ Object qualifiers may follow a name and further clarify names that are similar. 
 | Source | Src | lngBufferSrc |
 | Destination | Dest | lngBufferDest |
 
-## Arrays
+## Arrays <a name="arrays"></a>
 
 Array names must be prefixed with "a". The upper and lower bounds of the array must be declared explicitly (unless they’re not known at design-time).
 Example:
@@ -155,7 +164,7 @@ Example:
 Dim astrMonths(1 To 12) as String
 ```
 
-## Constants
+## Constants <a name="constants"></a>
 
 Each word must be capitalised and the words separated with an underscore.  The base name must be a description of what the constant represents. 
 
@@ -165,9 +174,7 @@ User defined constant: g_intERR_INVALID_NAME
 Visual Basic: vbArrowHourglass
 ```
 
-# API  Declaration
-
-## API Declaration
+# API  Declaration <a name="api-declaration"></a>
 
 API declarations must be laid out so that they are easily readable on the screen.
 ```
@@ -178,7 +185,7 @@ Public Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePri
 	ByVal lpFileName As String) As Long
 ```
 
-## Use unique alias names
+## Use unique alias names <a name="use-unique-alias-names"></a>
 
 In VB you can call external procedures in DLLs when you know the entry point (the name of the function in the DLL). However, the caveat is that you can only declare the external procedure once. If you load a library that calls the same Windows API that your module calls, you will get the infamous error, “Tried to load module with duplicate procedure definition.”
 ```
@@ -188,7 +195,7 @@ Declare smg_GetActiveWindow Lib "Kernel" Alias _
 
 # Form, Class & Module Naming <a name="form-class-and-module-naming"></a>
 
-## Internal Naming
+## Internal Naming <a name="internal-naming"></a>
 
 (i.e. the name assigned to the module within the VB Properties)
 
@@ -200,7 +207,7 @@ Declare smg_GetActiveWindow Lib "Kernel" Alias _
 | Collection class | C | CPersons1 |
 | Interface class | I | IPerson |
 
-## File naming
+## File naming <a name="file-naming"></a>
 
 (i.e. the name assigned to the module when saving the physical file)
 
@@ -213,7 +220,7 @@ Declare smg_GetActiveWindow Lib "Kernel" Alias _
 | Collection class | C | CPersons.cls1 | 
 | Interface class | I | IPerson.cls | 
 
-## Object instance naming
+## Object instance naming <a name="object-instance-naming"></a>
 
 (i.e. the name assigned when declaring a variable based on the form or class)
 
@@ -224,13 +231,13 @@ Declare smg_GetActiveWindow Lib "Kernel" Alias _
 | Class | obj | objPerson |
 | Collection | obj | objPersons |
 
-## Notes
+## Notes <a name="notes"></a>
 
 1 Classes which hold collections should have the same “C” prefix as any other classes, but should have a plural name (based on the type of objects held in the collection.  E.g. a class to hold a single person would be named CPerson, whereas a collection of Person objects would be named CPersons.
 
-# Naming Procedures/Functions/Parameters
+# Naming Procedures/Functions/Parameters <a name="naming-procedures-functions-parameters"></a>
 
-## Function Names
+## Function Names <a name="function-names"></a>
 
 Tags should not be prefixed to Function or Sub names, but **should** be appended to the parameters of these routines. For example:
 
@@ -239,7 +246,7 @@ _**Correct approach for internal function:**_
 Private Function TotalUp(ByVal sngSubTotal As Single) As Integer
 ```
 
-## Function return values
+## Function return values <a name="function-return-values"></a>
 
 Function return values should usually be held in a temporary variable and then assigned to the function variable at the end of the routine. This has two benefits. The code is not specific to the name of the function so portability is aided when cutting and pasting part of the function code elsewhere; also the value of the function variable may be used in calculations, otherwise a recursive call would be generated.
 Example:
@@ -257,7 +264,7 @@ Private Function Example(ByVal argintA as Integer) as Single
 End Function
 ```
 
-## Parameters
+## Parameters <a name="parameters"></a>
 
 Should you find it useful, you may also prefix parameter names with arg to avoid confusion between variables passed as parameters and those local to the subroutine .
 Example:
@@ -266,13 +273,13 @@ Private Function DoSomething(ByVal argstrMessage as String) as String
 ```
 However, should you choose to adopt this standard it must be applied consistently across the entire project
 
-# Naming Controls
+# Naming Controls <a name="naming-controls"></a>
 
-## Introduction 
+## Introduction  <a name="introduction"></a>
 
 Controls must be named with uniform prefixes strictly adhering to the following list.
 
-## Control tags
+## Control tags <a name="control-tags"></a>
 
 
 | Object Type | Tag | Notes |
@@ -301,7 +308,7 @@ Controls must be named with uniform prefixes strictly adhering to the following 
 | TabStrip | tab | tabOptions |
 | ListView | lvw | lvwHeadings |
 
-## Naming menu items
+## Naming menu items <a name="naming-menu-items"></a>
 
 The number of menu options can be great, so it is recommended that there be a standard for the names given to menus.  The tag for any menu item whether an option or title is mnu.  Prefixing must ideally continue beyond the initial prefix.  The first prefix after mnu is the menu bar title followed by the option then any subsequent option.
 
@@ -311,9 +318,9 @@ Top level menu item – mnuFile
 Menu sub item – mnuFileSave
 ```
 
-# **Naming Data Access Objects**
+# **Naming Data Access Objects** <a name="naming-data-access-objects"></a>
 
-## ADO
+## ADO <a name="ado"></a>
 
 If you include references to both ADO and DAO in the same project you must explicitly specify which object model you wish to use when declaring variables.
 Example:
@@ -322,7 +329,7 @@ Dim cnnStore As ADODB.Connection
 Dim cnnOther As DAO.Connection
 ```
 
-## ADO objects
+## ADO objects <a name="ado-objects"></a>
 
 | Object Type | Tag | Example |
 | --- | --- | --- |
@@ -332,7 +339,7 @@ Dim cnnOther As DAO.Connection
 | Error | err | errLoop |
 | Recordset | rst | rstForecast |
 
-## MS Access objects
+## MS Access objects <a name="ms-access-objects"></a>
 
 The following is a suggested naming convention for use with MS Access objects – you may find it useful for larger Access projects which have many objects within the same database.  
 
@@ -354,13 +361,13 @@ The following is a suggested naming convention for use with MS Access objects �
 | Macro (menu) | mmnu | mmnuEntryFormFile |
 | Module | mod | modBilling |
 
-# Layout
+# Layout <a name="layout"></a>
 
-## Indentation – tab width
+## Indentation – tab width <a name="indentation-tab-width"></a>
 
 When working in a VB or VBA design environment you **must** have the **Tab Width** set to 4 (see the Editor tab in Tools > Options).  This is the default VB setting, and using it ensures compatibility when code is worked on by more than one person.
 
-## Indentation - general
+## Indentation - general <a name="indentation-general"></a>
 
 Code must be indented consistently adhering to the following rules:
 - Declarations must not be indented.
@@ -400,9 +407,9 @@ ErrHandler:
 	Resume ExitHere
 ```
 
-# Commenting Code
+# Commenting Code <a name="commenting-code"></a>
 
-## Comments
+## Comments <a name="comments"></a>
 
 Remember the following points:
 - Code must be commented appropriately.  The goal should be to improve understanding and maintainability of the code.
@@ -424,18 +431,18 @@ Public Sub DeleteCustomer(ByVal argintID As Long)
 End Sub
 ```
 
-## Commenting code when doing maintenance work
+## Commenting code when doing maintenance work <a name="commenting-code-when-doing-maintenance-work"></a>
 
 Avoid over-commenting code when doing maintenance work.  Bear in mind the need to maintain overall clarity in the code, and remember that revision history should be taken care of by SourceSafe 
 Make sure that any existing comments still make sense **after** you’ve made your changes - paying particular attention to any comments/explanations in the header of the routine.
 You are responsible for ensuring that **all** existing comments remain accurate (and that they still make sense) after your changes have been implemented.
 Although SourceSafe controls the history, It is handy to future users if new blocks of code are commented with the date, initials of developer and the CR number to aim future developers reading the code.
 
-## Etiquette when commenting code
+## Etiquette when commenting code <a name="etiquette-when-commenting-code"></a>
 
 When you include one or more routines written by other developers in your project you should ensure that any author (and assumption/purpose) information in the routine header is kept accurate.  You should probably retain the original author’s name, but you **must** also include your own name if you have changed it in any way at all.
 
-## Pre-compilation commands
+## Pre-compilation commands <a name="pre-compilation-commands"></a>
 
 These are treated as a code IF statement would be.  All code relating to the condition must be indented as if it was a normal IF block.  These can be useful for including/excluding debug code etc.  For example:
 
@@ -448,9 +455,9 @@ These are treated as a code IF statement would be.  All code relating to the con
 #ENDIF
 ```
 
-# Error Handling
+# Error Handling <a name="error-handling"></a>
 
-## Generic error handler
+## Generic error handler <a name="generic-error-handler"></a>
 
 Consistent error handlers must be implemented. The following error handler should be used:
 ```
@@ -475,6 +482,6 @@ ErrHandler:
 End Sub
 ```
 
-## Error handling labels
+## Error handling labels <a name="error-handling-labels"></a>
 
 The labels **ErrHandler** and **ExitHere** are used both for consistency across routines, and to facilitate easier copying and pasting of error handlers between routines.
