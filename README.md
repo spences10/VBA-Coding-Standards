@@ -232,7 +232,7 @@ Example:
 
 ```vba
 User defined constant: g_intERR_INVALID_NAME
-Visual Basic: vbarrowHourglass
+Visual Basic: vbArrowHourglass
 ```
 
 ## API Declaration
