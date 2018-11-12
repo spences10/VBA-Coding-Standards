@@ -1,4 +1,4 @@
-# vba Code Guidelines
+# VBA Code Guidelines
 
 <!-- TOC -->
 
