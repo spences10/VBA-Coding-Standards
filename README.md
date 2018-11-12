@@ -2,7 +2,7 @@
 
 <!-- TOC -->
 
-- [vba Code Guidelines](#vba-code-guidelines)
+- [VBA Code Guidelines](#vba-code-guidelines)
   - [General Advice](#general-advice)
   - [Parameters](#parameters)
   - [General errors](#general-errors)
