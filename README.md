@@ -59,13 +59,31 @@ Always use Option Explicit as the first line in every code module. To switch thi
 ## Parameters <a name="parameters-by-val"></a>
 
 Avoid confusion over ByVal and ByRef. Be aware of the default for parameters being ByRef. Be explicit when passing parameters.
- 
-Example:
+- [Force] Only use ByRef where you intend to modify the parameter and pass the change back to the Caller.
+- [Force] Pass parameter ByVal if they are not to be changes
+- [Suggest] Explicitly use ByRef in an input parameter is to be changed, but watch for signs to redesign.
+
+Pass by Reference example:
+```VBA
+Private Sub ChangeRefValue()
+    Dim intX As Integer
+    intX = 1
+    Debug.Print intX
+
+    Call ChangeValueByRef(intX)
+End Sub
+
+Sub ChangeValueByRef(ByRef intY As Integer)
+    intY = intY + 5
+End Sub
 ```
+
+Pass by Value example:
+```VBA
 Public Sub Load(ByVal strName As String, ByVal strPhone As String)
 ```
 
-## General errors <a name="parameters"></a>
+## General errors <a name="general-errors"></a>
 
 Error handling must be used wherever practicable i.e. within each procedure.
 Use On Error Goto ErrHandler
@@ -73,7 +91,7 @@ Handle errors where they occur. This may involve handling the error and raising 
 
 # Variables <a name="variables"></a>
 
-## General <a name="general-errors"></a>
+## General <a name="general"></a>
 Where global variables are used, they must all be defined in one module.
 
 ## Declaring <a name="declaring"></a>
@@ -160,7 +178,7 @@ Object qualifiers may follow a name and further clarify names that are similar. 
 
 Array names must be prefixed with "a". The upper and lower bounds of the array must be declared explicitly (unless they’re not known at design-time).
 Example:
-```
+```VBA
 Dim astrMonths(1 To 12) as String
 ```
 
@@ -169,7 +187,7 @@ Dim astrMonths(1 To 12) as String
 Each word must be capitalised and the words separated with an underscore.  The base name must be a description of what the constant represents. 
 
 Example:
-```
+```VBA
 User defined constant: g_intERR_INVALID_NAME
 Visual Basic: vbArrowHourglass
 ```
@@ -177,12 +195,12 @@ Visual Basic: vbArrowHourglass
 # API  Declaration <a name="api-declaration"></a>
 
 API declarations must be laid out so that they are easily readable on the screen.
-```
+```VBA
 Public Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" _
-	(ByVal lpApplicationName As String, _
-	ByVal lpKeyName As Any, _
-	ByVal lpString As Any, _
-	ByVal lpFileName As String) As Long
+    (ByVal lpApplicationName As String, _
+    ByVal lpKeyName As Any, _
+    ByVal lpString As Any, _
+    ByVal lpFileName As String) As Long
 ```
 
 ## Use unique alias names <a name="use-unique-alias-names"></a>
@@ -242,7 +260,7 @@ Declare smg_GetActiveWindow Lib "Kernel" Alias _
 Tags should not be prefixed to Function or Sub names, but **should** be appended to the parameters of these routines. For example:
 
 _**Correct approach for internal function:**_
-```
+```VBA
 Private Function TotalUp(ByVal sngSubTotal As Single) As Integer
 ```
 
@@ -250,17 +268,17 @@ Private Function TotalUp(ByVal sngSubTotal As Single) As Integer
 
 Function return values should usually be held in a temporary variable and then assigned to the function variable at the end of the routine. This has two benefits. The code is not specific to the name of the function so portability is aided when cutting and pasting part of the function code elsewhere; also the value of the function variable may be used in calculations, otherwise a recursive call would be generated.
 Example:
-```
+```VBA
 Private Function Example(ByVal argintA as Integer) as Single
-	Dim sngRetVal as Single
+    Dim sngRetVal as Single
 
-	' Set default value
-	sngRetVal = 0
+    ' Set default value
+    sngRetVal = 0
 
-	<code block>
+    <code block>
 
-	' Set the Function value
-	Example = sngRetVal
+    ' Set the Function value
+    Example = sngRetVal
 End Function
 ```
 
@@ -268,7 +286,7 @@ End Function
 
 Should you find it useful, you may also prefix parameter names with arg to avoid confusion between variables passed as parameters and those local to the subroutine .
 Example:
-```
+```VBA
 Private Function DoSomething(ByVal argstrMessage as String) as String
 ```
 However, should you choose to adopt this standard it must be applied consistently across the entire project
@@ -324,7 +342,7 @@ Menu sub item – mnuFileSave
 
 If you include references to both ADO and DAO in the same project you must explicitly specify which object model you wish to use when declaring variables.
 Example:
-```
+```VBA
 Dim cnnStore As ADODB.Connection
 Dim cnnOther As DAO.Connection
 ```
@@ -379,32 +397,32 @@ Code must be indented consistently adhering to the following rules:
 - Code between With and End With statements must be indented by one tab stop.
 - Code within error trap must be indented by to one tab stop.
 Example
-```
+```VBA
 Dim strTest as String
 Dim wrk as Workspace
 On Error Goto ErrHandler
-	If strTest = "" Then
-    	strTest = "Nothing"
-	Else
-    	strTest = ""
-	EndIf
+    If strTest = "" Then
+        strTest = "Nothing"
+    Else
+        strTest = ""
+    EndIf
 
     Do While Not rst.EOF
-		rst.Add
+        rst.Add
         rst(0) = strTest
         rst.Update
-	Loop
+    Loop
 
-	Select Case strTest
-    	Case ""
-        	<code block>
+    Select Case strTest
+        Case ""
+            <code block>
         Case Else
             <code block>
         End Select
 ExitHere:
     Exit Sub
 ErrHandler:
-	Resume ExitHere
+    Resume ExitHere
 ```
 
 # Commenting Code <a name="commenting-code"></a>
@@ -417,17 +435,17 @@ Remember the following points:
 - Important variable declarations may include an inline comment describing the use of the variable being declared.
 
 Example:
-```
+```VBA
 Dim strLookUp as String 'Accepts value from user to search for
 ```
 - Comments for individual lines appear above, or of the code to which they refer.
 - The functional overview comment of a procedure may be indented one space to aid readability. 
 
 Example:
-```
+```VBA
 Public Sub DeleteCustomer(ByVal argintID As Long)
-	'Removes customer from Database
-	cnVideo.Execute "DELETE FROM Customer WHERE CustomerID=" & argintID
+    'Removes customer from Database
+    cnVideo.Execute "DELETE FROM Customer WHERE CustomerID=" & argintID
 End Sub
 ```
 
@@ -446,12 +464,12 @@ When you include one or more routines written by other developers in your projec
 
 These are treated as a code IF statement would be.  All code relating to the condition must be indented as if it was a normal IF block.  These can be useful for including/excluding debug code etc.  For example:
 
-```
+```VBA
 #Const DebugMode = True
 #IF  DebugMode THEN
-	<code block>
+    <code block>
 #ELSE
-	<code block>
+    <code block>
 #ENDIF
 ```
 
@@ -460,25 +478,25 @@ These are treated as a code IF statement would be.  All code relating to the con
 ## Generic error handler <a name="generic-error-handler"></a>
 
 Consistent error handlers must be implemented. The following error handler should be used:
-```
+```VBA
 On Error GoTo ErrHandler
     <code block>
 
 ExitHere:
 On Error Resume Next
-   	<code block>
+    <code block>
 Exit Sub
-ErrHandler: 	
+ErrHandler:
     [WriteErrLog Err.Number]
-	   Select Case Err.Number
-		  Case <Err No>
-			     Resume Next
-		  Case <Err No>
-			     Resume ExitHere
-		  Case Else
-			     ' Unexpected Error
-			     Resume ExitHere
-	   End Select
+        Select Case Err.Number
+            Case <Err No>
+                Resume Next
+            Case <Err No>
+                Resume ExitHere
+            Case Else
+                ' Unexpected Error
+                Resume ExitHere
+        End Select
 End Sub
 ```
 
