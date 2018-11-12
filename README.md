@@ -72,7 +72,7 @@ parameters being ByRef. Be explicit when passing parameters.
 
 Pass by Reference example:
 
-```VBA
+```vba
 Private Sub ChangeRefValue()
     Dim intX As Integer
     intX = 1
@@ -88,7 +88,7 @@ End Sub
 
 Pass by Value example:
 
-```VBA
+```vba
 Public Sub Load(ByVal strName As String, ByVal strPhone As String)
 ```
 
@@ -218,7 +218,7 @@ Array names must be prefixed with "a". The upper and lower bounds of
 the array must be declared explicitly (unless they’re not known at
 design-time). Example:
 
-```VBA
+```vba
 Dim astrMonths(1 To 12) as String
 ```
 
@@ -230,7 +230,7 @@ represents.
 
 Example:
 
-```VBA
+```vba
 User defined constant: g_intERR_INVALID_NAME
 Visual Basic: vbArrowHourglass
 ```
@@ -240,7 +240,7 @@ Visual Basic: vbArrowHourglass
 API declarations must be laid out so that they are easily readable on
 the screen.
 
-```VBA
+```vba
 Public Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" _
     (ByVal lpApplicationName As String, _
     ByVal lpKeyName As Any, _
@@ -316,7 +316,7 @@ be appended to the parameters of these routines. For example:
 
 _**Correct approach for internal function:**_
 
-```VBA
+```vba
 Private Function TotalUp(ByVal sngSubTotal As Single) As Integer
 ```
 
@@ -330,7 +330,7 @@ function code elsewhere; also the value of the function variable may
 be used in calculations, otherwise a recursive call would be
 generated. Example:
 
-```VBA
+```vba
 Private Function Example(ByVal argintA as Integer) as Single
     Dim sngRetVal as Single
 
@@ -350,7 +350,7 @@ Should you find it useful, you may also prefix parameter names with
 arg to avoid confusion between variables passed as parameters and
 those local to the subroutine . Example:
 
-```VBA
+```vba
 Private Function DoSomething(ByVal argstrMessage as String) as String
 ```
 
@@ -415,7 +415,7 @@ If you include references to both ADO and DAO in the same project you
 must explicitly specify which object model you wish to use when
 declaring variables. Example:
 
-```VBA
+```vba
 Dim cnnStore As ADODB.Connection
 Dim cnnOther As DAO.Connection
 ```
@@ -481,7 +481,7 @@ Code must be indented consistently adhering to the following rules:
   tab stop.
 - Code within error trap must be indented by to one tab stop. Example
 
-```VBA
+```vba
 Dim strTest as String
 Dim wrk as Workspace
 On Error Goto ErrHandler
@@ -527,7 +527,7 @@ Remember the following points:
 
 Example:
 
-```VBA
+```vba
 Dim strLookUp as String 'Accepts value from user to search for
 ```
 
@@ -538,7 +538,7 @@ Dim strLookUp as String 'Accepts value from user to search for
 
 Example:
 
-```VBA
+```vba
 Public Sub DeleteCustomer(ByVal argintID As Long)
     'Removes customer from Database
     cnVideo.Execute "DELETE FROM Customer WHERE CustomerID=" & argintID
@@ -575,7 +575,7 @@ to the condition must be indented as if it was a normal IF block.
 These can be useful for including/excluding debug code etc. For
 example:
 
-```VBA
+```vba
 #Const DebugMode = True
 #IF  DebugMode THEN
     <code block>
@@ -591,7 +591,7 @@ example:
 Consistent error handlers must be implemented. The following error
 handler should be used:
 
-```VBA
+```vba
 On Error GoTo ErrHandler
     <code block>
 
