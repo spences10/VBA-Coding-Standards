@@ -458,7 +458,7 @@ many objects within the same database.
 
 ### Indentation – tab width
 
-When working in a VB or vba design environment you **must** have the
+When working in a VB or VBA design environment you **must** have the
 **Tab Width** set to 4 (see the Editor tab in Tools > Options). This
 is the default VB setting, and using it ensures compatibility when
 code is worked on by more than one person.
