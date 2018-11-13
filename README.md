@@ -76,9 +76,11 @@ Pass by Reference example:
 Private Sub ChangeRefValue()
     Dim intX As Integer
     intX = 1
-    Debug.Print intX
+    Debug.Print intX    ' print value of intX is 1
 
     Call ChangeValueByRef(intX)
+
+    Debug.Print intX    ' print value of intX is 6
 End Sub
 
 Sub ChangeValueByRef(ByRef intY As Integer)
@@ -155,11 +157,12 @@ the first uppercase letter where the base name begins. This makes the
 names more readable. The base and qualifier components begin with an
 uppercase letter.
 
-| Prefix | Use                | Notes                             |
-| ------ | ------------------ | --------------------------------- |
-| None   | Local to procedure | No scope prefix as in: dblMaximum |
-| m\_    | Module level scope | m_strPolicyHolder                 |
-| g\_    | Global scope       | g_intCarsLast                     |
+| Prefix      | Meaning                                                                       | Notes                             |
+| ----------- | ----------------------------------------------------------------------------- | --------------------------------- |
+| &lt;None&gt;| Local variable, </br>procedure-level lifetime, </br>declared with “Dim”       | No scope prefix as in: dblMaximum |
+| s\_ or st\_ | Local variable, </br>object lifetime, </br>declared with “Static”             | s_intProductID or st_intProductID |
+| m\_         | Private (module) variable, </br>object lifetime, </br>declared with “Private” | m_strPolicyHolder                 |
+| g\_         | Public (global) variable, </br>object lifetime, </br>declared with “Public”   | g_intCarsLast                     |
 
 ### Tag
 
@@ -167,20 +170,20 @@ The tag is the only required component, but in almost all cases the
 name will have the base name component since you need to be able to
 distinguish two objects of the same type.
 
-| Variable type     | Tag | Notes         |
-| ----------------- | --- | ------------- |
-| Boolean           | bln | blnFound      |
-| Byte              | byt | bytRasterData |
-| Currency          | cur | curRevenue    |
-| Date (Time)       | dat | datStart      |
-| Double            | dbl | dblTolerance  |
-| Enum              | enm | enmColours    |
-| Integer           | int | intQuantity   |
-| Long              | lng | lngDistance   |
-| Single            | sng | sngAverage    |
-| String            | str | strFName      |
-| User-defined type | udt | udtEmployee   |
-| Variant           | var | varCheckSum   |
+| Variable type     | Tag      | Notes                      |
+| ----------------- | -------- | -------------------------- |
+| Boolean           | bln or b | blnFound or bFound         |
+| Byte              | byt      | bytRasterData              |
+| Currency          | cur      | curRevenue                 |
+| Date (Time)       | dat      | datStart                   |
+| Double            | dbl      | dblTolerance               |
+| Enum              | enm      | enmColours                 |
+| Integer           | int or i | intQuantity or iQuantity   |
+| Long              | lng      | lngDistance                |
+| Single            | sng      | sngAverage                 |
+| String            | str or s | strFName or sFName         |
+| User-defined type | udt      | udtEmployee                |
+| Variant           | var or v | varCheckSum or vCheckSum   |
 
 ### Base name
 
