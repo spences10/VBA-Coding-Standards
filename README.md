@@ -177,20 +177,34 @@ The tag is the only required component, but in almost all cases the
 name will have the base name component since you need to be able to
 distinguish two objects of the same type.
 
-| Variable type     | Tag      | Notes                      |
-| ----------------- | -------- | -------------------------- |
-| Boolean           | bln or b | blnFound or bFound         |
-| Byte              | byt      | bytRasterData              |
-| Currency          | cur      | curRevenue                 |
-| Date (Time)       | dat      | datStart                   |
-| Double            | dbl      | dblTolerance               |
-| Enum              | enm      | enmColours                 |
-| Integer           | int or i | intQuantity or iQuantity   |
-| Long              | lng      | lngDistance                |
-| Single            | sng      | sngAverage                 |
-| String            | str or s | strFName or sFName         |
-| User-defined type | udt      | udtEmployee                |
-| Variant           | var or v | varCheckSum or vCheckSum   |
+| Variable type     | Tag | Notes         |
+| ----------------- | --- | ------------- |
+| Boolean           | bln | blnFound      |
+| Byte              | byt | bytRasterData |
+| Currency          | cur | curRevenue    |
+| Date (Time)       | dat | datStart      |
+| Double            | dbl | dblTolerance  |
+| Enum              | enm | enmColours    |
+| Integer           | int | intQuantity   |
+| Long              | lng | lngDistance   |
+| Single            | sng | sngAverage    |
+| String            | str | strFName      |
+| User-defined type | udt | udtEmployee   |
+| Variant           | var | varCheckSum   |
+
+[suggest] To avoid defining an ambiguous variable, it is strongly suggest to use
+3-letter abbreviations instead of using a single-letter abbreviations
+
+Positive Example:
+```vba
+Dim intProductID As Integer
+```
+
+Negative Example:
+```vba
+Dim iProductID As Integer   ' Too short abbreviative tag definition
+Dim orderID As Integer      ' Meaningless definition
+```
 
 ### Base name
 
