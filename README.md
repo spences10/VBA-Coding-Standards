@@ -76,9 +76,11 @@ Pass by Reference example:
 Private Sub ChangeRefValue()
     Dim intX As Integer
     intX = 1
-    Debug.Print intX
+    Debug.Print intX    ' print value of intX is 1
 
     Call ChangeValueByRef(intX)
+
+    Debug.Print intX    ' print value of intX is 6
 End Sub
 
 Sub ChangeValueByRef(ByRef intY As Integer)
@@ -103,30 +105,38 @@ client code.
 
 ### General
 
-Where global variables are used, they must all be defined in one
+[Force] Where global variables are used, they must all be defined in one
 module.
+
+[Force] Hard-coded(Magic) numbers and strings should be made into constants.
+
+[Force] Use explicit data casting fcuntion `Cstr()`, `CDate()`, `Cbool()` etc.
 
 ### Declaring
 
-Variables must be dimensioned on separate lines, and should specify a
+[Force] Variables must be dimensioned on separate lines, and should specify a
 datatype (except where this is not possible – as when using certain
 scripting languages).
 
 ### Comments
 
-All variables must be declared at the top of each procedure or module
+[Suggest] All variables must be declared at the top of each procedure or module
 and must ideally be grouped so that all variable types are placed
 together.
 
 ### Variants
 
-Variants may be used where appropriate (e.g. to hold arrays returned
+[Suggest] Variants may be used where appropriate (e.g. to hold arrays returned
 by a function, or where Nulls may be encountered), but alternative
 data types should be used where possible.
 
+[Suggest] Advoid using Variants data type unless absolutely necessary.
+Variants are slower then native types, when there's large dataset
+or a big macro project.
+
 ### Dates
 
-Where dates are displayed to users you should avoid ambiguous formats
+[Force] Where dates are displayed to users you should avoid ambiguous formats
 where either years or days vs. months might be confused (such as
 DD/MM/YY), however the ultimate decision maker on this issue is the
 customer.
@@ -182,6 +192,20 @@ distinguish two objects of the same type.
 | User-defined type | udt | udtEmployee   |
 | Variant           | var | varCheckSum   |
 
+[suggest] To avoid defining an ambiguous variable, it is strongly suggest to use
+3-letter abbreviations instead of using a single-letter abbreviations
+
+Positive Example:
+```vba
+Dim intProductID As Integer
+```
+
+Negative Example:
+```vba
+Dim iProductID As Integer   ' Too short abbreviative tag definition
+Dim orderID As Integer      ' Meaningless definition
+```
+
 ### Base name
 
 The base name succinctly describes the object, not its class. That is,
@@ -214,12 +238,18 @@ intColourMatchLast. Other examples of qualifiers:
 
 ### Arrays
 
-Array names must be prefixed with "a". The upper and lower bounds of
-the array must be declared explicitly (unless they’re not known at
-design-time). Example:
+[Force] Array names must be prefixed with "a" or "arr". The upper and lower
+bounds ofthe array must be declared explicitly (unless they’re not known at
+design-time).
 
+Positive Example:
 ```vba
-Dim astrMonths(1 To 12) as String
+Dim astrMonths(1 To 12) As String
+```
+
+Negative Example:
+```vba
+Dim strMonths(1 To 12) As String
 ```
 
 ### Constants
