@@ -165,12 +165,11 @@ the first uppercase letter where the base name begins. This makes the
 names more readable. The base and qualifier components begin with an
 uppercase letter.
 
-| Prefix      | Meaning                                                                       | Notes                             |
-| ----------- | ----------------------------------------------------------------------------- | --------------------------------- |
-| &lt;None&gt;| Local variable, </br>procedure-level lifetime, </br>declared with “Dim”       | No scope prefix as in: dblMaximum |
-| s\_ or st\_ | Local variable, </br>object lifetime, </br>declared with “Static”             | s_intProductID or st_intProductID |
-| m\_         | Private (module) variable, </br>object lifetime, </br>declared with “Private” | m_strPolicyHolder                 |
-| g\_         | Public (global) variable, </br>object lifetime, </br>declared with “Public”   | g_intCarsLast                     |
+| Prefix | Use                | Notes                             |
+| ------ | ------------------ | --------------------------------- |
+| None   | Local to procedure | No scope prefix as in: dblMaximum |
+| m\_    | Module level scope | m_strPolicyHolder                 |
+| g\_    | Global scope       | g_intCarsLast                     |
 
 ### Tag
 
